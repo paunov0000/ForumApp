@@ -16,20 +16,6 @@ namespace ForumApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var posts = await this._context.Posts.Select(p => new PostViewModel
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Content = p.Content
-            }).ToListAsync();
-
-            return View(posts);
-        }
-
-
-        [HttpGet]
         public IActionResult Create()
         {
             var model = new PostViewModel();
