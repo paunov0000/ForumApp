@@ -62,7 +62,7 @@ namespace ForumApp.Controllers
             }
 
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -102,7 +102,7 @@ namespace ForumApp.Controllers
             this._context.Posts.Remove(post);
             await this._context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
     }
