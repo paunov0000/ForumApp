@@ -21,9 +21,6 @@
 </div>
 
 
-<button id="test">Test</button>
-
-
 @if (Model.Count() > 0)
 
 {
@@ -48,11 +45,11 @@
 
                             <a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-warning">Edit</a>
 
-                            <form class="mt-2" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id">
+                            <form class="mt-2" id="form" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id">
 
                                 <div class="d-grid gap-2">
 
-                                    <input type="submit" value="Delete" class="btn btn-danger mb-2" onclick="return confirm(`Are you sure you want to delete post: @post.Title`)" />
+                                    <input type="submit" id="post-delete" value="Delete" class="btn btn-danger mb-2" />
 
                                 </div>
 
@@ -85,9 +82,37 @@ else
 
 @section Scripts {
     <script>
-        let element = document.getElementById("test");
-        element.onclick = () => {
-            Swal.fire("SweetAlert2 is working!");
+        let element = document.getElementById("post-delete");
+        let form = document.getElementById("form");
+        element.onclick = (e) => {
+            e.preventDefault();
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success",
+                        
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+
+                    setTimeout(() => {
+                        form.submit();
+                    }, 2000)
+                }
+            });
         }
     </script>
 }
