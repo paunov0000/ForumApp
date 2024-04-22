@@ -1,5 +1,7 @@
+using ForumApp.Data;
 using ForumApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace ForumApp.Controllers
@@ -7,20 +9,26 @@ namespace ForumApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ForumAppDbContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            ForumAppDbContext _context)
         {
             _logger = logger;
+            context = _context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var posts = await this.context.Posts.Select(p => new PostViewModel()
+            {
+                Id = p.Id,
+                Content = p.Content,
+                Title = p.Title,
+            })
+                .ToListAsync();
 
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(posts);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
