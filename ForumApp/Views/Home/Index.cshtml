@@ -23,36 +23,36 @@
 </div>
 
 <div class="bg-secondary rounded-3 flex-grow-1 flex-shrink-1 m-4 d-flex flex-column">
-@if (Model.Count() > 0)
-{
-    <div class="row">
-        @foreach (var post in Model)
-        {
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title text-center">@post.Title<p></h4>
-                        <p class="card-text">@post.Content</p>
-                        <div class="d-grid gap-2">
-                            <a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-warning">Edit</a>
-                            <form asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" class="mt-2">
-                                <div class="d-grid gap-2">
-                                    <input type="submit" onclick="deleteAlert(event)" value="Delete" class="btn btn-danger mb-2" />
-                                </div>
-                            </form>
+    @if (Model.Count() > 0)
+    {
+        <div class="row">
+            @foreach (var post in Model)
+            {
+                <div class="col-3 py-3 px-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">@post.Title<p></h4>
+                            <p class="card-text">@post.Content</p>
+                            <div class="d-grid gap-2">
+                                <a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-warning">Edit</a>
+                                <form asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" class="mt-2">
+                                    <div class="d-grid gap-2">
+                                        <input type="submit" onclick="deleteAlert(event)" value="Delete" class="btn btn-danger mb-2" />
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-}
-else
-{
+            }
+        </div>
+    }
+    else
+    {
         <div class="m-auto">
             <p class="fs-3 text-warning">No posts yet!</p>
         </div>
-}
+    }
 </div>
 
 @section Scripts {
