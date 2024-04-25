@@ -4,77 +4,51 @@
 
 @{
 
-    ViewBag.Title = "All Posts";
+    ViewBag.Title = "Posts";
 
 }
 
+<div class="d-flex flex-column align-items-center">
 
+    <h2 class="text-black-50 px-5 py-2 bg-secondary rounded-3 fs-4">@ViewBag.Title</h2>
 
-<h2 class="text-center">@ViewBag.Title</h2>
+    <hr />
 
-<hr />
-
-<div class="d-grid mb-2 gap-2">
-
-    <a asp-controller="Posts" asp-action="Create" class="btn btn-primary">Add Post</a>
+    <div class="">
+        <a asp-controller="Posts" asp-action="Create" class="btn btn-primary mb-2">
+            Add Post
+        </a>
+    </div>
 
 </div>
 
-
 @if (Model.Count() > 0)
-
 {
-
     <div class="row">
-
         @foreach (var post in Model)
-
         {
-
             <div class="col-sm-6">
-
                 <div class="card">
-
                     <div class="card-body">
-
                         <h4 class="card-title text-center">@post.Title<p></h4>
-
                         <p class="card-text">@post.Content</p>
-
                         <div class="d-grid gap-2">
-
                             <a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-warning">Edit</a>
-
-                            <form class="mt-2" id="form" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id">
-
+                            <form asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" class="mt-2">
                                 <div class="d-grid gap-2">
                                     <input type="submit" onclick="deleteAlert(event)" value="Delete" class="btn btn-danger mb-2" />
                                 </div>
-
                             </form>
-
                         </div>
-
-
-
                     </div>
-
                 </div>
-
             </div>
-
         }
-
     </div>
-
 }
-
 else
-
 {
-
     <p class="text-center">No posts yet!</p>
-
 }
 
 
@@ -97,13 +71,13 @@ else
                         title: "Deleted!",
                         text: "Your file has been deleted.",
                         icon: "success",
-                        
+
                     })
-                    .then((result) => {
-                        if (result.isConfirmed) {
-                            form.submit();
-                        }
-                    });
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });
 
                     setTimeout(() => {
                         form.submit();
