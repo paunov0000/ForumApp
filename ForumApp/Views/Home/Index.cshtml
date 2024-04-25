@@ -48,9 +48,7 @@
                             <form class="mt-2" id="form" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id">
 
                                 <div class="d-grid gap-2">
-
-                                    <input type="submit" id="post-delete" value="Delete" class="btn btn-danger mb-2" />
-
+                                    <input type="submit" onclick="deleteAlert(event)" value="Delete" class="btn btn-danger mb-2" />
                                 </div>
 
                             </form>
