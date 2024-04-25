@@ -80,9 +80,8 @@ else
 
 @section Scripts {
     <script>
-        let element = document.getElementById("post-delete");
-        let form = document.getElementById("form");
-        element.onclick = (e) => {
+        function deleteAlert(e) {
+            let form = e.target.parentElement.parentElement;
             e.preventDefault();
             Swal.fire({
                 title: "Are you sure?",
